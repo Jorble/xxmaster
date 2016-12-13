@@ -1,0 +1,11 @@
+<resources>>
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">@color/green</item>
+        <!-- 设置activity切换动画 -->
+        <item name="android:windowAnimationStyle">@style/activityAnimation</item>
+    </style>
+</resources>

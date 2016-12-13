@@ -1,0 +1,16 @@
+<resources>
+    <!-- text -->
+    <dimen name="TextSize1">20sp</dimen>
+    <dimen name="TextSize2">15sp</dimen>
+    <dimen name="TextSize3">10sp</dimen>
+    <!--activity-->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="activity_title_height">45dp</dimen>
+    <dimen name="activity_back_left">20dp</dimen>
+    <!--sliding menu-->
+    <dimen name="shadow_width">15dp</dimen>
+    <dimen name="slidingmenu_offset">80dp</dimen>
+    <!--setting layout-->
+    <dimen name="layout_margin">5dp</dimen>
+</resources>
