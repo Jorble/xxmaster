@@ -1,4 +1,4 @@
-package com.jor.xxmaster.activity;
+package com.jor.xxmaster.register;
 
 import android.app.Activity;
 import android.content.Intent;

@@ -1,4 +1,4 @@
-package com.jor.xxmaster.fragment;
+package com.jor.xxmaster.menu.news;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -9,16 +9,27 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.huewu.pla.lib.internal.PLA_AdapterView;
 import com.jor.xxmaster.R;
 import com.jor.xxmaster.app.App;
+import com.jor.xxmaster.app.Cfg;
+import com.jor.xxmaster.entity.News;
+import com.jor.xxmaster.intenet.ApiService;
+import com.jor.xxmaster.utils.L;
 import com.jor.xxmaster.view.MultiColumnPullToRefreshListView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 /**
  * @author Jorble
@@ -29,29 +40,44 @@ public class NewsFragment extends Fragment {
     private static final NewsFragment instance = new NewsFragment();
 
     public static NewsFragment getInstance() {
-        imageList=new ArrayList<String>();
-        imageList.add("http://sc.jb51.net/uploads/allimg/150703/14-150F3102113Y7.jpg");
-        imageList.add("http://h.hiphotos.baidu.com/zhidao/pic/item/e824b899a9014c0869f80ddd0d7b02087af4f482.jpg");
-        imageList.add("http://sc.jb51.net/uploads/allimg/150703/14-150F3102113Y7.jpg");
-        imageList.add("http://h.hiphotos.baidu.com/zhidao/pic/item/e824b899a9014c0869f80ddd0d7b02087af4f482.jpg");
-        imageList.add("http://sc.jb51.net/uploads/allimg/150703/14-150F3102113Y7.jpg");
-        imageList.add("http://h.hiphotos.baidu.com/zhidao/pic/item/e824b899a9014c0869f80ddd0d7b02087af4f482.jpg");
-        imageList.add("http://sc.jb51.net/uploads/allimg/150703/14-150F3102113Y7.jpg");
-        imageList.add("http://h.hiphotos.baidu.com/zhidao/pic/item/e824b899a9014c0869f80ddd0d7b02087af4f482.jpg");
-        imageList.add("http://sc.jb51.net/uploads/allimg/150703/14-150F3102113Y7.jpg");
-        imageList.add("http://h.hiphotos.baidu.com/zhidao/pic/item/e824b899a9014c0869f80ddd0d7b02087af4f482.jpg");
-
         return instance;
     }
 
     private MultiColumnPullToRefreshListView waterfallView;//可以把它当成一个listView
     private WaterfallAdapter adapter;
-    static ArrayList<String> imageList;
+    static List<News.ResultBean.DataBean> itemList=new ArrayList<>();
+    Retrofit retrofit;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        
+        retrofit = new Retrofit.Builder()
+                .baseUrl(Cfg.NEWS_URL)
+                //增加返回值为String的支持
+                .addConverterFactory(ScalarsConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        ApiService apiService = retrofit.create(ApiService.class);
 
+        Call<News> call = apiService.getNews(Cfg.JUHE_APIKEY,"top");
+        call.enqueue(new Callback<News>() {
+            @Override
+            public void onResponse(Call<News> call, Response<News> response) {
+                News news=response.body();
+                if(news==null)return;
+                //装载新闻列表数据
+                itemList.clear();
+                itemList.addAll(news.getResult().getData());
+                adapter.notifyDataSetChanged();
+
+            }
+
+            @Override
+            public void onFailure(Call<News> call, Throwable t) {
+                L.i("请求数据失败!");
+            }
+        });
     }
 
     @Override
@@ -64,7 +90,7 @@ public class NewsFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.frag_news, null);
 
-        adapter = new WaterfallAdapter( App.getContext(),imageList);
+        adapter = new WaterfallAdapter( App.getContext(),itemList);
 
         //瀑布流
         waterfallView = (MultiColumnPullToRefreshListView) view.findViewById(R.id.waterfallList);
@@ -101,13 +127,16 @@ public class NewsFragment extends Fragment {
         super.onDestroy();
     }
 
+    /**
+     * 适配器
+     */
     public static class WaterfallAdapter extends BaseAdapter {
 
 
-        ArrayList<String> list;
+        List<News.ResultBean.DataBean> list;
         Context context;
 
-        public WaterfallAdapter(Context context,ArrayList<String> list) {
+        public WaterfallAdapter(Context context,List<News.ResultBean.DataBean> list) {
             this.list = list;
             this.context = context;
         }
@@ -148,11 +177,11 @@ public class NewsFragment extends Fragment {
 
             //这里就是异步加载网络图片的地方
             Picasso.with(context)
-                   .load(list.get(position))
+                   .load(list.get(position).getThumbnail_pic_s())
                    .into(holder.ivIcon);
 
             //标题
-            holder.titleTv.setText("自然风景图");
+            holder.titleTv.setText(list.get(position).getTitle());
             return view;
         }
 
@@ -161,7 +190,6 @@ public class NewsFragment extends Fragment {
 
     static class Holder {
         public ImageView ivIcon;
-        public ProgressBar pbLoad;
         public TextView titleTv;
     }
 }

@@ -1,4 +1,4 @@
-package com.jor.xxmaster.activity;
+package com.jor.xxmaster.menu.setting.push;
 
 import android.app.Activity;
 import android.content.Intent;

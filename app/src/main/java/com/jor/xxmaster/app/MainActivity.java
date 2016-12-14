@@ -1,4 +1,4 @@
-package com.jor.xxmaster.activity;
+package com.jor.xxmaster.app;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -12,8 +12,8 @@ import android.widget.TextView;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 import com.jor.xxmaster.R;
-import com.jor.xxmaster.fragment.LeftFragment;
-import com.jor.xxmaster.fragment.NewsFragment;
+import com.jor.xxmaster.menu.LeftFragment;
+import com.jor.xxmaster.menu.news.NewsFragment;
 
 /**
  * @date 2016/5/18

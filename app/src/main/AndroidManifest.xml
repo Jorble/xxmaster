@@ -112,7 +112,7 @@
 
 
         <activity
-            android:name=".activity.LoginActivity"
+            android:name=".login.LoginActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" >
             <intent-filter>
@@ -122,20 +122,20 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.RegisterActivity"
+            android:name=".register.RegisterActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" >
 
         </activity>
         <activity
-            android:name=".activity.MainActivity"
+            android:name=".app.MainActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" >
 
         </activity>
 
         <activity
-            android:name=".activity.MsgPushActivity"
+            android:name=".menu.setting.push.MsgPushActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" >
 

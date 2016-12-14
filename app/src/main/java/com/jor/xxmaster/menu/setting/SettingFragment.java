@@ -1,4 +1,4 @@
-package com.jor.xxmaster.fragment;
+package com.jor.xxmaster.menu.setting;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 
 import com.jor.xxmaster.R;
-import com.jor.xxmaster.activity.MsgPushActivity;
+import com.jor.xxmaster.menu.setting.push.MsgPushActivity;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;

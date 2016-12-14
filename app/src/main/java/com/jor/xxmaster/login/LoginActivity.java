@@ -1,4 +1,4 @@
-package com.jor.xxmaster.activity;
+package com.jor.xxmaster.login;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.jor.xxmaster.app.MainActivity;
+import com.jor.xxmaster.register.RegisterActivity;
 import com.jor.xxmaster.app.App;
 import com.jor.xxmaster.app.Cfg;
 import com.jor.xxmaster.utils.RegExpValidatorUtils;

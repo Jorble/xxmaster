@@ -1,4 +1,4 @@
-package com.jor.xxmaster.fragment;
+package com.jor.xxmaster.menu;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -9,7 +9,9 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 
 import com.jor.xxmaster.R;
-import com.jor.xxmaster.activity.MainActivity;
+import com.jor.xxmaster.app.MainActivity;
+import com.jor.xxmaster.menu.setting.SettingFragment;
+import com.jor.xxmaster.menu.news.NewsFragment;
 
 /**
  * @author wuwenjie
