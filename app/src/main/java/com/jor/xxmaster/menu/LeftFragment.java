@@ -55,6 +55,7 @@ public class LeftFragment extends Fragment implements OnClickListener {
 
         settingView = view.findViewById(R.id.tvSetting);
         settingView.setOnClickListener(this);
+
     }
 
     @Override
