@@ -1,0 +1,3 @@
+include ':app'
+include ':sliding_menu'
+include ':waterfall'
