@@ -25,6 +25,9 @@
     <string name="setting_messgepush">消息推送</string>
     <string name="setting_about">关于</string>
 
+    <!--新闻详情-->
+    <string name="news_details">新闻详情</string>
+
     <!--推送页-->
     <string name="ban_msgpush">禁止推送</string>
 

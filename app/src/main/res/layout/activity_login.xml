@@ -19,7 +19,7 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@mipmap/icon"/>
+            android:src="@mipmap/login_img"/>
     </com.zhy.android.percent.support.PercentLinearLayout>
 
     <!--登录-->
@@ -66,6 +66,7 @@
         android:layout_width="match_parent"
         android:gravity="center_horizontal"
         android:orientation="horizontal"
+        android:layout_margin="20dp"
         >
         <TextView
             android:id="@+id/register_tv"

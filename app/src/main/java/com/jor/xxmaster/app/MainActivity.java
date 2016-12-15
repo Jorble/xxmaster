@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
@@ -14,10 +15,11 @@ import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 import com.jor.xxmaster.R;
 import com.jor.xxmaster.menu.LeftFragment;
 import com.jor.xxmaster.menu.news.NewsFragment;
+import com.jor.xxmaster.utils.DoubleClickExitHelper;
 
 /**
- * @date 2016/5/18
  * @author Jorble
+ * @date 2016/5/18
  * @description 主界面
  */
 public class MainActivity extends SlidingFragmentActivity implements
@@ -27,11 +29,15 @@ public class MainActivity extends SlidingFragmentActivity implements
     private TextView topTextView;
     private SlidingMenu sm;
     private Fragment mContent;
+    DoubleClickExitHelper mDoubleClickExitHelper;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        // 双击返回键退出
+        mDoubleClickExitHelper = new DoubleClickExitHelper(this);
+        //侧滑菜单
         initSlidingMenu(savedInstanceState);
 
         topButton = (ImageView) findViewById(R.id.topButton);
@@ -44,7 +50,7 @@ public class MainActivity extends SlidingFragmentActivity implements
     /**
      * 默认为新闻页
      */
-    private void initDefaultItem(){
+    private void initDefaultItem() {
 //        switchConent(NewsFragment.getInstance(), getString(R.string.item_news));
         switchConent(NewsFragment.getInstance(), getString(R.string.item_news));
     }
@@ -129,4 +135,16 @@ public class MainActivity extends SlidingFragmentActivity implements
         activity.startActivity(new Intent(activity, MainActivity.class));
     }
 
+    /**
+     * 监听返回--是否退出程序
+     */
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        boolean flag = true;
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            // 是否退出应用
+            return mDoubleClickExitHelper.onKeyDown(keyCode, event);
+        }
+
+        return flag;
+    }
 }

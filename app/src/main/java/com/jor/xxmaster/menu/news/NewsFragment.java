@@ -3,7 +3,6 @@ package com.jor.xxmaster.menu.news;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +17,7 @@ import com.jor.xxmaster.app.Cfg;
 import com.jor.xxmaster.entity.News;
 import com.jor.xxmaster.intenet.ApiService;
 import com.jor.xxmaster.utils.L;
+import com.jor.xxmaster.utils.T;
 import com.jor.xxmaster.view.MultiColumnPullToRefreshListView;
 import com.squareup.picasso.Picasso;
 
@@ -47,11 +47,24 @@ public class NewsFragment extends Fragment {
     private WaterfallAdapter adapter;
     static List<News.ResultBean.DataBean> itemList=new ArrayList<>();
     Retrofit retrofit;
+    Call<News> call;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.frag_news, null);
+
         retrofit = new Retrofit.Builder()
                 .baseUrl(Cfg.NEWS_URL)
                 //增加返回值为String的支持
@@ -60,7 +73,7 @@ public class NewsFragment extends Fragment {
                 .build();
         ApiService apiService = retrofit.create(ApiService.class);
 
-        Call<News> call = apiService.getNews(Cfg.JUHE_APIKEY,"top");
+        call = apiService.getNews(Cfg.JUHE_APIKEY,"top");
         call.enqueue(new Callback<News>() {
             @Override
             public void onResponse(Call<News> call, Response<News> response) {
@@ -78,17 +91,6 @@ public class NewsFragment extends Fragment {
                 L.i("请求数据失败!");
             }
         });
-    }
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.frag_news, null);
 
         adapter = new WaterfallAdapter( App.getContext(),itemList);
 
@@ -100,16 +102,35 @@ public class NewsFragment extends Fragment {
             public void onRefresh() {
                 // TODO Auto-generated method stub
                 //下拉刷新要做的事
+                Call<News> cloneCall = call.clone();
+                cloneCall.enqueue(new Callback<News>() {
+                    @Override
+                    public void onResponse(Call<News> call, Response<News> response) {
+                        News news=response.body();
+                        if(news==null)return;
+                        //装载新闻列表数据
+                        itemList.clear();
+                        itemList.addAll(news.getResult().getData());
+                        adapter.notifyDataSetChanged();
+                        T.showShort(getContext(),"更新完成!");
+                        //刷新完成后记得调用这个
+                        waterfallView.onRefreshComplete();
+                    }
 
-                //刷新完成后记得调用这个
-                waterfallView.onRefreshComplete();
+                    @Override
+                    public void onFailure(Call<News> call, Throwable t) {
+                        T.showShort(getContext(),"请求数据失败!");
+                    }
+                });
             }
         });
+
+        //点击事件
         waterfallView.setOnItemClickListener(new PLA_AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(PLA_AdapterView<?> parent, View view, int position, long id) {
-                //点击事件
-                Log.i(App.TAG,"onItemClick="+position);
+                //进入新闻详情页
+                NewsDetailsActivity.startActivity(getActivity(),itemList.get(position-1));
             }
         });
 
@@ -149,7 +170,7 @@ public class NewsFragment extends Fragment {
 
         @Override
         public Object getItem(int arg0) {
-            return list.get(arg0);
+            return null;
         }
 
         @Override
@@ -182,6 +203,7 @@ public class NewsFragment extends Fragment {
 
             //标题
             holder.titleTv.setText(list.get(position).getTitle());
+
             return view;
         }
 

@@ -1,5 +1,8 @@
 package com.jor.xxmaster.entity;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.List;
 
 /*
@@ -84,7 +87,7 @@ public class News {
             this.data = data;
         }
 
-        public static class DataBean {
+        public static class DataBean implements Parcelable{
             private String title;
             private String date;
             private String author_name;
@@ -174,6 +177,49 @@ public class News {
 
             public void setRealtype(String realtype) {
                 this.realtype = realtype;
+            }
+
+            /**
+             * 注意：其中在写writeToParcel(...)方法和createFromParcel(...)方法中Parcel对象写入和读取的顺序要一致，
+             * 不然会出现顺序异常和乱码。
+             */
+            public static final Creator<DataBean> CREATOR = new Creator<DataBean>() {
+                public DataBean createFromParcel(Parcel source) {
+                    DataBean mDataBean = new DataBean();
+                    mDataBean.title = source.readString();
+                    mDataBean.date = source.readString();
+                    mDataBean.author_name = source.readString();
+                    mDataBean.thumbnail_pic_s = source.readString();
+                    mDataBean.thumbnail_pic_s02 = source.readString();
+                    mDataBean.thumbnail_pic_s03 = source.readString();
+                    mDataBean.url = source.readString();
+                    mDataBean.uniquekey = source.readString();
+                    mDataBean.type = source.readString();
+                    mDataBean.realtype = source.readString();
+                    return mDataBean;
+                }
+                public DataBean[] newArray(int size) {
+                    return new DataBean[size];
+                }
+            };
+
+            @Override
+            public int describeContents() {
+                return 0;
+            }
+
+            @Override
+            public void writeToParcel(Parcel dest, int flags) {
+                dest.writeString(title);
+                dest.writeString(date);
+                dest.writeString(author_name);
+                dest.writeString(thumbnail_pic_s);
+                dest.writeString(thumbnail_pic_s02);
+                dest.writeString(thumbnail_pic_s03);
+                dest.writeString(url);
+                dest.writeString(uniquekey);
+                dest.writeString(type);
+                dest.writeString(realtype);
             }
         }
     }
