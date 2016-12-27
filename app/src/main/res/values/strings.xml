@@ -19,6 +19,7 @@
     <!--侧滑菜单-->
     <string name="user_name">Jorble</string>
     <string name="item_news">新闻</string>
+    <string name="item_ofo">骑行</string>
     <string name="item_setting">设置</string>
 
     <!--设置页-->
@@ -27,6 +28,15 @@
 
     <!--新闻详情-->
     <string name="news_details">新闻详情</string>
+
+    <!-- ofo -->
+    <string name="add_bike">新增</string>
+    <string name="bike_id_empty">车牌号不能为空</string>
+    <string name="bike_id_error">车牌号个数不对</string>
+    <string name="bike_pwd_empty">车密码不能为空</string>
+    <string name="bike_pwd_error">车密码为4位数</string>
+    <string name="add_success">添加成功</string>
+    <string name="bike_id_not_exist">没有该车牌号码,为您转到ofo</string>
 
     <!--推送页-->
     <string name="ban_msgpush">禁止推送</string>

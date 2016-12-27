@@ -9,6 +9,9 @@ public class Cfg {
     //野狗连接地址
     public static final String USER_REF="https://xxmaster.wilddogio.com/user";
 
+    //野狗ofo地址
+    public static final String OFO_REF="https://xxmaster.wilddogio.com/ofo";
+
     //聚合APIkey
     public static final String JUHE_APIKEY="aa0bfa658109c36021e65b3382dd49e3";
 

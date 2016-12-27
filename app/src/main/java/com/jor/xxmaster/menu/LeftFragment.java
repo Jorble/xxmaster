@@ -10,8 +10,9 @@ import android.view.ViewGroup;
 
 import com.jor.xxmaster.R;
 import com.jor.xxmaster.app.MainActivity;
-import com.jor.xxmaster.menu.setting.SettingFragment;
 import com.jor.xxmaster.menu.news.NewsFragment;
+import com.jor.xxmaster.menu.ofo.OfoFragment;
+import com.jor.xxmaster.menu.setting.SettingFragment;
 
 /**
  * @author wuwenjie
@@ -20,6 +21,7 @@ import com.jor.xxmaster.menu.news.NewsFragment;
  */
 public class LeftFragment extends Fragment implements OnClickListener {
     private View newsView;
+    private View ofoView;
     private View settingView;
 
     private static final LeftFragment instance = new LeftFragment();
@@ -53,6 +55,9 @@ public class LeftFragment extends Fragment implements OnClickListener {
         newsView = view.findViewById(R.id.tvNews);
         newsView.setOnClickListener(this);
 
+        ofoView = view.findViewById(R.id.tvOfo);
+        ofoView.setOnClickListener(this);
+
         settingView = view.findViewById(R.id.tvSetting);
         settingView.setOnClickListener(this);
 
@@ -76,6 +81,10 @@ public class LeftFragment extends Fragment implements OnClickListener {
             case R.id.tvNews: // 新闻
                 newContent = NewsFragment.getInstance();
                 title = getString(R.string.item_news);
+                break;
+            case R.id.tvOfo: // ofo
+                newContent = OfoFragment.getInstance();
+                title = getString(R.string.item_ofo);
                 break;
             case R.id.tvSetting: // 设置
                 newContent = SettingFragment.getInstance();
