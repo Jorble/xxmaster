@@ -6,6 +6,9 @@ package com.jor.xxmaster.app;
 public class Cfg {
     public static final String TAG="xxmaster";
 
+    //科大讯飞appID
+    public static final String IFLY_APPID="586318c1";
+
     //野狗连接地址
     public static final String USER_REF="https://xxmaster.wilddogio.com/user";
 

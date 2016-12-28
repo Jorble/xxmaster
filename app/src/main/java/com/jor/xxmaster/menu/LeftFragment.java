@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import com.jor.xxmaster.R;
 import com.jor.xxmaster.app.MainActivity;
+import com.jor.xxmaster.menu.face.FaceFragment;
 import com.jor.xxmaster.menu.news.NewsFragment;
 import com.jor.xxmaster.menu.ofo.OfoFragment;
 import com.jor.xxmaster.menu.setting.SettingFragment;
@@ -22,6 +23,7 @@ import com.jor.xxmaster.menu.setting.SettingFragment;
 public class LeftFragment extends Fragment implements OnClickListener {
     private View newsView;
     private View ofoView;
+    private View faceView;
     private View settingView;
 
     private static final LeftFragment instance = new LeftFragment();
@@ -55,6 +57,9 @@ public class LeftFragment extends Fragment implements OnClickListener {
         newsView = view.findViewById(R.id.tvNews);
         newsView.setOnClickListener(this);
 
+        faceView = view.findViewById(R.id.tvFace);
+        faceView.setOnClickListener(this);
+
         ofoView = view.findViewById(R.id.tvOfo);
         ofoView.setOnClickListener(this);
 
@@ -81,6 +86,10 @@ public class LeftFragment extends Fragment implements OnClickListener {
             case R.id.tvNews: // 新闻
                 newContent = NewsFragment.getInstance();
                 title = getString(R.string.item_news);
+                break;
+            case R.id.tvFace: // 人脸识别
+                newContent = FaceFragment.getInstance();
+                title = getString(R.string.item_fece);
                 break;
             case R.id.tvOfo: // ofo
                 newContent = OfoFragment.getInstance();
