@@ -17,7 +17,7 @@
     <string name="login_lost_pwd">忘记密码</string>
 
     <!--侧滑菜单-->
-    <string name="user_name">Jorble</string>
+    <string name="userName">Jorble</string>
     <string name="item_news">新闻</string>
     <string name="item_im">实时通信</string>
     <string name="item_fece">人脸识别</string>

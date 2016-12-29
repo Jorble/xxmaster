@@ -16,6 +16,7 @@ import com.jor.xxmaster.R;
 import com.jor.xxmaster.app.App;
 import com.jor.xxmaster.app.Cfg;
 import com.jor.xxmaster.utils.L;
+import com.jor.xxmaster.utils.T;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -31,9 +32,9 @@ public class ImFragment extends Fragment {
     FrameLayout containerFl;
 
     //默认
-    String userName="jorble";
-    String toUserName="boat";
-    String password="123456";
+    String userName = "jorble";
+    String toUserName = "boat";
+    String password = "123456";
 
     public static ImFragment getInstance() {
         return instance;
@@ -60,37 +61,41 @@ public class ImFragment extends Fragment {
 
         ButterKnife.bind(this, view);
 
-        new Thread(new Runnable() {
+        String appUser = App.getAcache().getAsString(Cfg.USER_EMAIL_KEY);
+        //如果登录过，则初始化登录框信息
+        if (appUser != null && appUser.equals("563738103@qq.com")) {
+            userName = "boat";
+            toUserName = "jorble";
+        }
+
+        L.i("appUser:" + appUser);
+        L.i("userName:" + userName);
+        L.i("toUserName:" + toUserName);
+        EMClient.getInstance().login(userName, password, new EMCallBack() {//回调
             @Override
-            public void run() {
+            public void onSuccess() {
+                EMClient.getInstance().groupManager().loadAllGroups();
+                EMClient.getInstance().chatManager().loadAllConversations();
+                L.i("登录聊天服务器成功:" + userName);
+            }
 
-                String appUser=App.getAcache().getAsString(Cfg.USER_EMAIL_KEY);
-                //如果登录过，则初始化登录框信息
-                if(appUser!=null && appUser.equals("563738103@qq.com")) {
-                    userName="boat";
-                    toUserName="jorble";
-                }
+            @Override
+            public void onProgress(int progress, String status) {
 
-                EMClient.getInstance().login(userName,password,new EMCallBack() {//回调
+            }
+
+            @Override
+            public void onError(int code, String message) {
+                getActivity().runOnUiThread(new Runnable() {
                     @Override
-                    public void onSuccess() {
-                        EMClient.getInstance().groupManager().loadAllGroups();
-                        EMClient.getInstance().chatManager().loadAllConversations();
-                        L.i("登录聊天服务器成功！");
-                    }
-
-                    @Override
-                    public void onProgress(int progress, String status) {
-
-                    }
-
-                    @Override
-                    public void onError(int code, String message) {
-                        L.i("登录聊天服务器失败！");
+                    public void run() {
+                        T.showShort(getContext(),"连接失败:"+userName);
                     }
                 });
+
+                L.i("登录聊天服务器失败+" + userName);
             }
-        }).start();
+        });
 
 
         //new出EaseChatFragment或其子类的实例

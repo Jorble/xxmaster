@@ -7,14 +7,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.jor.xxmaster.R;
+import com.jor.xxmaster.app.App;
+import com.jor.xxmaster.app.Cfg;
 import com.jor.xxmaster.app.MainActivity;
 import com.jor.xxmaster.menu.face.FaceFragment;
 import com.jor.xxmaster.menu.im.ImFragment;
 import com.jor.xxmaster.menu.news.NewsFragment;
 import com.jor.xxmaster.menu.ofo.OfoFragment;
 import com.jor.xxmaster.menu.setting.SettingFragment;
+import com.jor.xxmaster.view.CircleImageView;
 
 /**
  * @author wuwenjie
@@ -27,6 +31,9 @@ public class LeftFragment extends Fragment implements OnClickListener {
     private View faceView;
     private View imView;
     private View settingView;
+
+    CircleImageView profile_image;
+    TextView userName_tv;
 
     private static final LeftFragment instance = new LeftFragment();
 
@@ -56,6 +63,15 @@ public class LeftFragment extends Fragment implements OnClickListener {
 
 
     public void findViews(View view) {
+        profile_image = (CircleImageView)view.findViewById(R.id.profile_image);
+        userName_tv = (TextView)view.findViewById(R.id.userName_tv);
+        String appUser = App.getAcache().getAsString(Cfg.USER_EMAIL_KEY);
+        //如果登录过，则初始化登录框信息
+        if (appUser != null && appUser.equals("563738103@qq.com")) {
+            profile_image.setImageResource(R.mipmap.head2);
+            userName_tv.setText("boat");
+        }
+
         newsView = view.findViewById(R.id.tvNews);
         newsView.setOnClickListener(this);
 

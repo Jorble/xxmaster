@@ -7,10 +7,10 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.jor.xxmaster.app.MainActivity;
-import com.jor.xxmaster.register.RegisterActivity;
 import com.jor.xxmaster.app.App;
 import com.jor.xxmaster.app.Cfg;
+import com.jor.xxmaster.app.MainActivity;
+import com.jor.xxmaster.register.RegisterActivity;
 import com.jor.xxmaster.utils.RegExpValidatorUtils;
 import com.wilddog.client.AuthData;
 import com.wilddog.client.Wilddog;
@@ -56,7 +56,7 @@ public class LoginActivity extends Activity {
                 email=emailEt.getText().toString();
                 password=passwordEt.getText().toString();
                 //验证信息并登录
-                if(RegExpValidatorUtils.isEmail(email) && password.equals(password)) {
+                if(RegExpValidatorUtils.isEmail(email)) {
                     Wilddog ref = new Wilddog(Cfg.USER_REF);
                     ref.authWithPassword(email, password, new AuthResultHandler());
                 }else {

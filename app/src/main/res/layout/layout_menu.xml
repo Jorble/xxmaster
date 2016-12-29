@@ -23,13 +23,14 @@
             app:border_width="1dp" />
 
         <TextView
+            android:id="@+id/userName_tv"
             android:layout_width="match_parent"
             android:layout_height="28.0dip"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/profile_image"
             android:gravity="center_vertical"
             android:paddingLeft="15.0dip"
-            android:text="@string/user_name"
+            android:text="@string/userName"
             android:textColor="@color/white"
             android:textSize="14.0sp" />
 
