@@ -102,7 +102,7 @@ public class FaceFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Setting.setShowLog(true);
+        Setting.setShowLog(false);
 
     }
 

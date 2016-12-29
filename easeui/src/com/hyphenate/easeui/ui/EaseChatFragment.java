@@ -211,13 +211,16 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
             onMessageListInit();
         }
 
-        titleBar.setLeftLayoutClickListener(new OnClickListener() {
+        //点击返回退出
+//        titleBar.setLeftLayoutClickListener(new OnClickListener() {
+//
+//            @Override
+//            public void onClick(View v) {
+//                onBackPressed();
+//            }
+//        });
 
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
+        //点击清空记录
         titleBar.setRightLayoutClickListener(new OnClickListener() {
 
             @Override
@@ -1054,5 +1057,6 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
          */
         EaseCustomChatRowProvider onSetCustomChatRowProvider();
     }
-    
+
+
 }

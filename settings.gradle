@@ -1,3 +1,4 @@
-include ':app'
+include ':app', ':easeui1'
 include ':sliding_menu'
 include ':waterfall'
+project(':easeui1').projectDir = new File('easeui')

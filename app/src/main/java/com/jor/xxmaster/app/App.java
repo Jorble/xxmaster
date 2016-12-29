@@ -2,6 +2,9 @@ package com.jor.xxmaster.app;
 
 import android.app.Application;
 
+import com.hyphenate.chat.EMClient;
+import com.hyphenate.chat.EMOptions;
+import com.hyphenate.easeui.controller.EaseUI;
 import com.iflytek.cloud.SpeechUtility;
 import com.jor.xxmaster.utils.ACache;
 import com.wilddog.client.Wilddog;
@@ -32,6 +35,10 @@ public class App extends Application{
 
     @Override
     public void onCreate() {
+
+        /**
+         * 讯飞
+         */
         // 应用程序入口处调用，避免手机内存过小，杀死后台进程后通过历史intent进入Activity造成SpeechUtility对象为null
         // 如在Application中调用初始化，需要在Mainifest中注册该Applicaiton
         // 注意：此接口在非主进程调用会返回null对象，如需在非主进程使用语音功能，请增加参数：SpeechConstant.FORCE_LOGIN+"=true"
@@ -46,10 +53,21 @@ public class App extends Application{
         // Setting.setShowLog(false);
 
         super.onCreate();
-        /*******************************
-         *          上下文              *
-         *******************************/
         context = this;
+
+        /**
+         * 环信
+         */
+        EMOptions options = new EMOptions();
+        // 默认添加好友时，是不需要验证的，改成需要验证
+//        options.setAcceptInvitationAlways(false);
+        //初始化
+        EMClient.getInstance().init(this, options);
+        //初始化easeUI
+        EaseUI.getInstance().init(context, options);
+        //在做打包混淆时，关闭debug模式，避免消耗不必要的资源
+        EMClient.getInstance().setDebugMode(true);
+
         /*******************************
          *          野狗                *
          *******************************/

@@ -284,12 +284,12 @@
         "source": "E:\\workplace\\AndroidStudioProject\\xxmaster\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\ease_chatting_setmode_keyboard_btn_pressed.png"
     },
     {
-        "merged": "E:\\workplace\\AndroidStudioProject\\xxmaster\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\ee_4.png",
-        "source": "E:\\workplace\\AndroidStudioProject\\xxmaster\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\ee_4.png"
-    },
-    {
         "merged": "E:\\workplace\\AndroidStudioProject\\xxmaster\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\ease_record_animate_05.png",
         "source": "E:\\workplace\\AndroidStudioProject\\xxmaster\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\ease_record_animate_05.png"
+    },
+    {
+        "merged": "E:\\workplace\\AndroidStudioProject\\xxmaster\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\ee_4.png",
+        "source": "E:\\workplace\\AndroidStudioProject\\xxmaster\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\ee_4.png"
     },
     {
         "merged": "E:\\workplace\\AndroidStudioProject\\xxmaster\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\ee_21.png",

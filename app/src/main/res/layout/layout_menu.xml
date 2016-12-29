@@ -59,6 +59,25 @@
         android:layout_height="2.0dip"
         android:background="@color/white" />
 
+    <!--实时通信-->
+    <TextView
+        android:id="@+id/tvIm"
+        android:layout_width="match_parent"
+        android:layout_height="50.0dip"
+        android:clickable="true"
+        android:drawablePadding="1.0dip"
+        android:gravity="center"
+        android:paddingLeft="15.0dip"
+        android:paddingRight="10.0dip"
+        android:text="@string/item_im"
+        android:textColor="@color/white"
+        android:textSize="16.0sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2.0dip"
+        android:background="@color/white" />
+
     <!--人脸识别-->
     <TextView
         android:id="@+id/tvFace"
